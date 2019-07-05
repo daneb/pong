@@ -1,36 +1,54 @@
 // The game engine
 
-function Game(canvas) {
-  var self = this
+class Game {
+  constructor(canvas) {
+    this.canvas = canvas;
+    this.context = canvas.getContext("2d");
+    this.width = canvas.width;
+    this.height = canvas.height;
+    this.keyPressed = {};
 
-  this.context = canvas.getContext("2d")
-  this.width = canvas.width
-  this.height = canvas.height
+    this.canvas.addEventListener('keydown', getKeysPressed, false);
+    this.canvas.addEventListener('keyup', getKeysPressed, false);
+    this.keys = {
+      32: 'space',
+      37: 'left',
+      38: 'up',
+      39: 'right',
+      40: 'down'
+    };
 
-  // Keep track of key states
-  // Eg.:
-  //   game.keyPressed.up === true  // while UP key is pressed
-  //   game.keyPressed.up === false // when UP key is released
-  this.keyPressed = {}
+  }
 
-  $(canvas).on('keydown keyup', function(e) {
-    // Convert key code to key name
-    var keyName = Game.keys[e.which]
+  getKeysPressed = (e) => {
+    // Convert Key Code to Key Name
+    let keyName = this.keys[e.which];
 
     if (keyName) {
-      // eg.: `self.keyPressed.up = true` on keydown
-      // Will be set to `false` on keyup
-      self.keyPressed[keyName] = e.type === 'keydown'
-      e.preventDefault()
+      this.keyPressed[keyName] = e.type === 'keydown';  
+      e.preventDefault();
     }
-  })
-}
+  }
 
-// Some key codes to key name mapping
-Game.keys = {
-  32: 'space',
-  37: 'left',
-  38: 'up',
-  39: 'right',
-  40: 'down'
+  start = () => {
+    let fps = 60;
+    let interval = 1000 / fps;
+
+    setInterval(() => {
+      this.update();
+      this.draw();
+    }, interval);
+  }
+
+  update = () => {
+    this.entities.forEach(entity => {
+      if (entity.update) entity.update();
+    });
+  }
+
+  draw = () => {
+    this.entities.forEach(entity => {
+      if (entity.draw) entity.draw(this.context);
+    })
+  }
 }
