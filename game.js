@@ -7,9 +7,6 @@ class Game {
     this.width = canvas.width;
     this.height = canvas.height;
     this.keyPressed = {};
-
-    this.canvas.addEventListener('keydown', getKeysPressed, false);
-    this.canvas.addEventListener('keyup', getKeysPressed, false);
     this.keys = {
       32: 'space',
       37: 'left',
@@ -20,7 +17,7 @@ class Game {
 
   }
 
-  getKeysPressed = (e) => {
+  getKeysPressed(e) {
     // Convert Key Code to Key Name
     let keyName = this.keys[e.which];
 
@@ -30,25 +27,31 @@ class Game {
     }
   }
 
-  start = () => {
+  start() {
+    var self = this;
     let fps = 60;
     let interval = 1000 / fps;
 
-    setInterval(() => {
-      this.update();
-      this.draw();
+    self.canvas.addEventListener('keydown', self.getKeysPressed, false);
+    self.canvas.addEventListener('keyup', self.getKeysPressed, false);
+
+    setInterval(function() {
+      self.update();
+      self.draw();
     }, interval);
   }
 
-  update = () => {
+  update() {
     this.entities.forEach(entity => {
       if (entity.update) entity.update();
     });
   }
 
-  draw = () => {
+  draw() {
+    var self = this;
+
     this.entities.forEach(entity => {
-      if (entity.draw) entity.draw(this.context);
+      if (entity.draw) entity.draw(self.context);
     })
   }
 }
