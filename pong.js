@@ -9,7 +9,8 @@ var canvas = document.getElementById('canvas'),
     game = new Game(canvas);
 
 game.entities = [
-    new Background()
+    new Background(),
+    new Ball()
 ];
 
 game.start();

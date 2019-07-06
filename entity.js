@@ -22,21 +22,21 @@ class Entity {
   // On each update, we apply the velocity to the current position.
   // This makes the entity move.
   // Entities are expected to override this method.
-  update() {
+  update = () => {
     this.x += this.xVelocity
     this.y += this.yVelocity
   }
 
   // The entity knows how to draw itself.
   // All entities of our game will be white rectangles.
-  draw() {
+  draw = (context) => {
     context.fillStyle = '#fff'
     context.fillRect(this.x, this.y, this.width, this.height)
   }
 
   // Basic bounding box collision detection.
   // Returns `true` if the entity intersect with another one.
-  intersect(other) {
+  intersect = (other) => {
     return this.y + this.height > other.y &&
           this.y               < other.y + other.height &&
           this.x + this.width  > other.x &&
