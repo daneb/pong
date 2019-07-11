@@ -68,26 +68,3 @@ class Bot extends Paddle {
   }
 
 }
-
-// function Bot() {
-//   Paddle.call(this)
-
-//   this.x = game.width - this.width - 20
-
-//   this.speed = 5
-// }
-
-// Bot.prototype = Object.create(Paddle.prototype)
-// Bot.prototype.constructor = Bot
-
-// Bot.prototype.update = function() {
-//   // Follow the ball
-//   if (this.y < game.ball.y) {
-//     this.yVelocity = this.speed
-//   } else {
-//     this.yVelocity = -this.speed
-//   }
-
-//   Paddle.prototype.update.apply(this, arguments)
-// }
-
