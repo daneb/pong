@@ -10,7 +10,8 @@ var canvas = document.getElementById('canvas'),
 
 game.entities = [
     new Background(),
-    new Ball()
+    new Ball(),
+    new Player()
 ];
 
 game.start();

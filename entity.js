@@ -1,6 +1,14 @@
 // The game is composed of entities
 
 class Entity {
+
+  x;
+  y;
+  width;
+  height;
+  xVelocity;
+  yVelocity;
+
   constructor() {
   
   // A game entity has ...
