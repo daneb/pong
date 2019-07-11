@@ -26,6 +26,7 @@ class Player extends Paddle {
   constructor() {
     super();
 
+    this.score = 0;
     this.x = 20;
   } 
   
@@ -42,6 +43,29 @@ class Player extends Paddle {
     super.update();
 
   }  
+
+}
+
+class Bot extends Paddle {
+  constructor() {
+    super();
+
+    this.score = 0;
+    this.x = game.width - this.width - 20;
+  }
+
+  update() {
+
+    this.speed = 5;
+
+    if(this.y < game.ball.y) {
+      this.yVelocity = this.speed;
+    } else if(this.y > game.ball.y) {
+      this.yVelocity = -this.speed;
+    }
+
+    super.update();
+  }
 
 }
 
