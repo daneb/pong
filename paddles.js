@@ -45,32 +45,6 @@ class Player extends Paddle {
 
 }
 
-// } 
-
-// function Player() {
-//   Paddle.call(this)
-  
-//   this.x = 20
-
-//   this.speed = 15
-// }
-
-// Player.prototype = Object.create(Paddle.prototype)
-// Player.prototype.constructor = Player
-
-// Player.prototype.update = function() {
-//   if (game.keyPressed.up) {
-//     this.yVelocity = -this.speed
-//   } else if (game.keyPressed.down) {
-//     this.yVelocity = this.speed
-//   } else {
-//     this.yVelocity = 0
-//   }
-
-//   Paddle.prototype.update.apply(this, arguments)
-// }
-
-
 // function Bot() {
 //   Paddle.call(this)
 
