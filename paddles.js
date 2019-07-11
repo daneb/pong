@@ -1,69 +1,95 @@
-function Paddle() {
-  Entity.call(this)
+class Paddle extends Entity {
 
-  this.width = 20
-  this.height = 100
+  y;
+  speed = 15;
 
-  this.y = game.height / 2 - this.height / 2
+  constructor() {
 
-  this.score = 0
-}
+    super();
 
-Paddle.prototype = Object.create(Entity.prototype)
-Paddle.prototype.constructor = Paddle
+    this.width = 20
+    this.height = 100
 
-Paddle.prototype.update = function() {
-  Entity.prototype.update.apply(this, arguments)
+    this.y = game.height / 2 - this.height / 2;
 
-  // Keep the paddle within the screen
-  this.y = Math.min(Math.max(this.y, 0),
-                    game.height - this.height)
-}
+  }
 
-
-function Player() {
-  Paddle.call(this)
+  update() {
+    super.update();
+    this.y = Math.min(Math.max(this.y, 0), game.height - this.height);
+  }
   
-  this.x = 20
+} 
 
-  this.speed = 15
+class Player extends Paddle {
+
+  constructor() {
+    super();
+
+    this.x = 20;
+  } 
+  
+  update() {
+
+    if (game.keyPressed.up) {
+      this.yVelocity = -this.speed;
+    } else if (game.keyPressed.down) {
+      this.yVelocity = this.speed;
+    } else {
+      this.yVelocity = 0;
+    }
+
+    super.update();
+
+  }  
+
 }
 
-Player.prototype = Object.create(Paddle.prototype)
-Player.prototype.constructor = Player
+// } 
 
-Player.prototype.update = function() {
-  if (game.keyPressed.up) {
-    this.yVelocity = -this.speed
-  } else if (game.keyPressed.down) {
-    this.yVelocity = this.speed
-  } else {
-    this.yVelocity = 0
-  }
+// function Player() {
+//   Paddle.call(this)
+  
+//   this.x = 20
 
-  Paddle.prototype.update.apply(this, arguments)
-}
+//   this.speed = 15
+// }
+
+// Player.prototype = Object.create(Paddle.prototype)
+// Player.prototype.constructor = Player
+
+// Player.prototype.update = function() {
+//   if (game.keyPressed.up) {
+//     this.yVelocity = -this.speed
+//   } else if (game.keyPressed.down) {
+//     this.yVelocity = this.speed
+//   } else {
+//     this.yVelocity = 0
+//   }
+
+//   Paddle.prototype.update.apply(this, arguments)
+// }
 
 
-function Bot() {
-  Paddle.call(this)
+// function Bot() {
+//   Paddle.call(this)
 
-  this.x = game.width - this.width - 20
+//   this.x = game.width - this.width - 20
 
-  this.speed = 5
-}
+//   this.speed = 5
+// }
 
-Bot.prototype = Object.create(Paddle.prototype)
-Bot.prototype.constructor = Bot
+// Bot.prototype = Object.create(Paddle.prototype)
+// Bot.prototype.constructor = Bot
 
-Bot.prototype.update = function() {
-  // Follow the ball
-  if (this.y < game.ball.y) {
-    this.yVelocity = this.speed
-  } else {
-    this.yVelocity = -this.speed
-  }
+// Bot.prototype.update = function() {
+//   // Follow the ball
+//   if (this.y < game.ball.y) {
+//     this.yVelocity = this.speed
+//   } else {
+//     this.yVelocity = -this.speed
+//   }
 
-  Paddle.prototype.update.apply(this, arguments)
-}
+//   Paddle.prototype.update.apply(this, arguments)
+// }
 
